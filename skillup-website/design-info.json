@@ -1,0 +1,825 @@
+{
+  "theme": {
+    "primary_color": "#1E90FF",
+    "secondary_color": "#F0F8FF",
+    "font_family": "system-ui, sans-serif",
+    "border_radius": "8px",
+    "box_shadow": "0 2px 4px rgba(0, 0, 0, 0.1)",
+    "typography": {
+      "h1": { "font_size": "2rem", "font_weight": "bold" },
+      "h2": { "font_size": "1.5rem", "font_weight": "bold" },
+      "h3": { "font_size": "1.25rem", "font_weight": "bold" },
+      "body": { "font_size": "1rem", "line_height": "1.5" }
+    }
+  },
+  "pages": [
+    {
+      "page_name": "Login",
+      "url": "/login",
+      "reference_image": "image_f940fe.png",
+      "layout": "Centered form with an app logo and a welcome message.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduConnect",
+          "links": ["Home", "About", "Courses", "Contact"],
+          "actions": ["Sign Up", "Log In"]
+        },
+        {
+          "type": "Form",
+          "title": "Welcome back",
+          "fields": [
+            { "label": "Email", "placeholder": "Enter your email" },
+            { "label": "Password", "placeholder": "Enter your password", "type": "password" }
+          ],
+          "links": ["Forgot password?"],
+          "buttons": [
+            { "text": "Log In", "type": "primary" }
+          ],
+          "footer_text": "Don't have an account?",
+          "footer_link": "Sign up"
+        }
+      ]
+    },
+    {
+      "page_name": "Sign Up",
+      "url": "/signup",
+      "reference_image": "image_f940d2.png",
+      "layout": "Centered form with an app logo and a sign-up message.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduConnect",
+          "links": ["Home", "About", "Courses", "Contact"],
+          "actions": ["Sign Up", "Log In"]
+        },
+        {
+          "type": "Form",
+          "title": "Create your account",
+          "fields": [
+            { "label": "Name", "placeholder": "Enter your name" },
+            { "label": "Email", "placeholder": "Enter your email" },
+            { "label": "Password", "placeholder": "Enter your password", "type": "password" }
+          ],
+          "buttons": [
+            { "text": "Sign Up", "type": "primary" }
+          ],
+          "footer_text": "Already have an account?",
+          "footer_link": "Log in"
+        }
+      ]
+    },
+    {
+      "page_name": "Course Landing Page",
+      "url": "/courses/{course_id}",
+      "reference_image": "image_f94049.jpg",
+      "layout": "Single-column layout with a header, course details, instructor info, description, and course content table.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduLearn",
+          "links": ["Home", "Courses", "Instructors"],
+          "actions": ["Sign Up", "Log In"]
+        },
+        {
+          "type": "HeroSection",
+          "title": "Advanced Data Science Techniques",
+          "description": "Master advanced data science techniques, including machine learning, deep learning, and data visualization, to solve complex real-world problems."
+        },
+        {
+          "type": "InstructorCard",
+          "name": "Dr. Robert Anderson",
+          "title": "Professor of Data Science",
+          "rating": 4.8,
+          "reviews": 120
+        },
+        {
+          "type": "Section",
+          "title": "Course Description",
+          "content": "This course provides an in-depth exploration of advanced data science techniques, covering topics such as machine learning algorithms, deep learning architectures, and data visualization methods. Students will learn how to apply these techniques to solve complex real-world problems and gain hands-on experience through practical projects and assignments."
+        },
+        {
+          "type": "Section",
+          "title": "Course Content",
+          "table": {
+            "columns": ["Module", "Lessons"],
+            "data": [
+              { "Module": "Module 1: Introduction to Advanced Data Science", "Lessons": "2 Lessons" },
+              { "Module": "Module 2: Machine Learning Algorithms", "Lessons": "4 Lessons" },
+              { "Module": "Module 3: Deep Learning Architectures", "Lessons": "3 Lessons" },
+              { "Module": "Module 4: Data Visualization Techniques", "Lessons": "5 Lessons" },
+              { "Module": "Module 5: Real-World Applications", "Lessons": "2 Lessons" }
+            ]
+          }
+        },
+        {
+          "type": "CallToAction",
+          "button": { "text": "Enroll Now", "type": "primary" }
+        }
+      ]
+    },
+    {
+      "page_name": "Course Video Player",
+      "url": "/courses/{course_id}/lesson/{lesson_id}",
+      "reference_image": "image_f94083.jpg",
+      "layout": "Video player at the top with course progress and a lesson list below.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduLearn",
+          "links": ["Home", "Courses", "Instructors"],
+          "actions": ["Search", "Notifications", "User Profile"]
+        },
+        {
+          "type": "Breadcrumbs",
+          "path": ["Course", "Lesson", "Video"]
+        },
+        {
+          "type": "VideoPlayer",
+          "progress_percentage": 60,
+          "current_time": "0:37",
+          "total_time": "2:35"
+        },
+        {
+          "type": "Section",
+          "title": "Course Progress",
+          "progress_bar": { "value": 60 }
+        },
+        {
+          "type": "Section",
+          "title": "Course Content",
+          "lesson_list": [
+            { "title": "Lesson 1: Introduction", "description": "Introduction to the course", "type": "video", "status": "completed" },
+            { "title": "Lesson 2: Basics", "description": "Understanding the basics", "type": "video", "status": "completed" },
+            { "title": "Lesson 3: Advanced Techniques", "description": "Advanced techniques", "type": "video", "status": "current" },
+            { "title": "Quiz 1: Basics Quiz", "description": "Test your knowledge", "type": "quiz", "status": "pending" },
+            { "title": "Lesson 4: Application", "description": "Practical application", "type": "video", "status": "pending" },
+            { "title": "Final Exam", "description": "Final assessment", "type": "exam", "status": "pending" }
+          ]
+        }
+      ]
+    },
+    {
+      "page_name": "My Learning",
+      "url": "/my-learning",
+      "reference_image": "image_f9409f.jpg",
+      "layout": "Tabbed view for courses in progress, completed, archived, and on a wishlist.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "LearnHub",
+          "links": ["Home", "My Learning", "Wishlist", "Cart"],
+          "actions": ["Search", "Notifications", "User Profile"]
+        },
+        {
+          "type": "PageTitle",
+          "title": "My learning",
+          "subtitle": "Courses you've enrolled in"
+        },
+        {
+          "type": "Tabs",
+          "tabs": ["In progress", "Completed", "Archived", "Wishlist"],
+          "active_tab": "In progress"
+        },
+        {
+          "type": "CourseListSection",
+          "title": "In progress (2)",
+          "courses": [
+            { "name": "Introduction to Data Science", "instructor": "Dr. Emily Carter", "rating": 4.5, "reviews": 1200, "action": "Continue learning" },
+            { "name": "Advanced Machine Learning", "instructor": "Dr. David Lee", "rating": 4.7, "reviews": 850, "action": "Continue learning" }
+          ]
+        },
+        {
+          "type": "CourseListSection",
+          "title": "Completed (1)",
+          "courses": [
+            { "name": "Python for Beginners", "instructor": "Dr. Sarah Chen", "rating": 4.6, "reviews": 1500, "action": "View certificate" }
+          ]
+        }
+      ]
+    },
+    {
+      "page_name": "Home Page",
+      "url": "/",
+      "reference_image": "image_f94023.jpg",
+      "layout": "Grid-based layout with featured and top courses, and a search bar.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Home", "My Courses", "Browse", "Instruct"],
+          "actions": ["Search", "Sign Up", "Log In"]
+        },
+        {
+          "type": "SearchBar",
+          "placeholder": "Search for anything"
+        },
+        {
+          "type": "CourseCategories",
+          "categories": ["All", "Design", "Development", "Marketing", "IT & Software"]
+        },
+        {
+          "type": "Section",
+          "title": "Featured",
+          "course_cards": [
+            { "title": "The Complete Web Development Bootcamp 2023", "description": "Become a full-stack web developer...", "image": "path/to/image1.jpg" },
+            { "title": "The Ultimate Drawing Course - Beginner to Advanced", "description": "Learn the #1 most in-demand skill...", "image": "path/to/image2.jpg" },
+            { "title": "Master Machine Learning & Data Science", "description": "Master Machine Learning and Data Science with Python...", "image": "path/to/image3.jpg" }
+          ]
+        },
+        {
+          "type": "Section",
+          "title": "Top courses",
+          "course_cards": [
+            { "title": "The Complete Web Development Bootcamp 2023", "description": "Become a full-stack web developer...", "image": "path/to/image4.jpg" },
+            { "title": "The Ultimate Drawing Course - Beginner to Advanced", "description": "Learn the #1 most in-demand skill...", "image": "path/to/image5.jpg" },
+            { "title": "Master Machine Learning & Data Science", "description": "Master Machine Learning and Data Science with Python...", "image": "path/to/image6.jpg" },
+            { "title": "The Complete Digital Marketing Course - 12 Courses in 1", "description": "Master Digital Marketing Strategy, Social Media Marketing...", "image": "path/to/image7.jpg" },
+            { "title": "Microsoft Excel - Excel from Beginner To Advanced", "description": "Learn everything you need to know about Microsoft Excel...", "image": "path/to/image8.jpg" },
+            { "title": "Python for Data Science and Machine Learning Bootcamp", "description": "Learn how to use Python for Data Science...", "image": "path/to/image9.jpg" },
+            { "title": "The Complete Financial Analyst Course 2023", "description": "Complete Financial Analyst Training: Excel, Accounting, Business Analysis, Financial Math, PowerPoint, and more.", "image": "path/to/image10.jpg" },
+            { "title": "The Complete SQL Bootcamp 2023: Go from Zero to Hero", "description": "Become an expert at SQL. Learn everything you need to know about SQL using PostgreSQL.", "image": "path/to/image11.jpg" },
+            { "title": "The Complete JavaScript Course 2023: Build Real Projects!", "description": "The most comprehensive Javascript course on the Internet! Master the skills and build real-world projects.", "image": "path/to/image12.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      "page_name": "Instructor Dashboard",
+      "url": "/instructor/dashboard",
+      "reference_image": "instructor_dashboard.jpg",
+      "layout": "Dashboard layout with statistics cards, charts, and recent activity.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Dashboard", "My Courses", "Analytics", "Profile"],
+          "actions": ["Notifications", "User Profile"]
+        },
+        {
+          "type": "PageTitle",
+          "title": "Instructor Dashboard",
+          "subtitle": "Overview of your teaching activities"
+        },
+        {
+          "type": "StatsCards",
+          "cards": [
+            { "title": "Total Courses", "value": "12", "icon": "book" },
+            { "title": "Total Students", "value": "1,234", "icon": "users" },
+            { "title": "Total Revenue", "value": "$45,678", "icon": "dollar" },
+            { "title": "Average Rating", "value": "4.8", "icon": "star" }
+          ]
+        },
+        {
+          "type": "Section",
+          "title": "Recent Activity",
+          "activity_list": [
+            { "type": "enrollment", "message": "New student enrolled in 'Advanced Java Programming'", "time": "2 hours ago" },
+            { "type": "review", "message": "New 5-star review on 'Web Development Basics'", "time": "4 hours ago" },
+            { "type": "completion", "message": "Student completed 'React Fundamentals'", "time": "1 day ago" }
+          ]
+        },
+        {
+          "type": "Section",
+          "title": "Course Performance",
+          "chart": { "type": "line", "data": "enrollment_trends" }
+        }
+      ]
+    },
+    {
+      "page_name": "Instructor Courses",
+      "url": "/instructor/courses",
+      "reference_image": "instructor_courses.jpg",
+      "layout": "Grid layout with course cards and management options.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Dashboard", "My Courses", "Analytics", "Profile"],
+          "actions": ["Notifications", "User Profile"]
+        },
+        {
+          "type": "PageTitle",
+          "title": "My Courses",
+          "subtitle": "Manage and create your courses"
+        },
+        {
+          "type": "ActionBar",
+          "buttons": [
+            { "text": "Create New Course", "type": "primary", "action": "create_course" },
+            { "text": "Import Course", "type": "secondary", "action": "import_course" }
+          ],
+          "filters": ["All Courses", "Published", "Draft", "Archived"]
+        },
+        {
+          "type": "CourseGrid",
+          "courses": [
+            {
+              "id": 1,
+              "title": "Complete Java Programming Course",
+              "description": "Learn Java from basics to advanced concepts",
+              "category": "Programming",
+              "status": "published",
+              "students": 456,
+              "rating": 4.7,
+              "revenue": "$12,340",
+              "actions": ["Edit", "Analytics", "Manage Content", "Settings"]
+            },
+            {
+              "id": 2,
+              "title": "Advanced Spring Boot Development",
+              "description": "Master Spring Boot framework with hands-on projects",
+              "category": "Programming",
+              "status": "draft",
+              "students": 0,
+              "rating": null,
+              "revenue": "$0",
+              "actions": ["Edit", "Publish", "Preview", "Delete"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_name": "Course Creation/Edit",
+      "url": "/instructor/courses/create",
+      "reference_image": "course_create.jpg",
+      "layout": "Multi-step form for creating or editing course details.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Dashboard", "My Courses", "Analytics", "Profile"],
+          "actions": ["Save Draft", "Preview", "Publish"]
+        },
+        {
+          "type": "Breadcrumbs",
+          "path": ["Dashboard", "My Courses", "Create Course"]
+        },
+        {
+          "type": "StepIndicator",
+          "steps": ["Basic Info", "Content", "Pricing", "Review"],
+          "current_step": 1
+        },
+        {
+          "type": "Form",
+          "title": "Course Basic Information",
+          "fields": [
+            { "label": "Course Title", "placeholder": "Enter course title", "required": true },
+            { "label": "Description", "placeholder": "Enter course description", "type": "textarea", "required": true },
+            { "label": "Category", "type": "select", "options": ["Programming", "Design", "Marketing", "Business"], "required": true },
+            { "label": "Thumbnail", "type": "file", "accept": "image/*" },
+            { "label": "Course Level", "type": "select", "options": ["Beginner", "Intermediate", "Advanced"] },
+            { "label": "Estimated Duration", "placeholder": "e.g., 10 hours", "type": "text" }
+          ],
+          "buttons": [
+            { "text": "Save & Continue", "type": "primary" },
+            { "text": "Save Draft", "type": "secondary" }
+          ]
+        }
+      ]
+    },
+    {
+      "page_name": "Course Content Management",
+      "url": "/instructor/courses/{course_id}/content",
+      "reference_image": "course_content.jpg",
+      "layout": "Hierarchical content structure with modules and lessons.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Dashboard", "My Courses", "Analytics", "Profile"],
+          "actions": ["Preview Course", "Publish Changes"]
+        },
+        {
+          "type": "Breadcrumbs",
+          "path": ["Dashboard", "My Courses", "Advanced Java Programming", "Content"]
+        },
+        {
+          "type": "PageTitle",
+          "title": "Course Content",
+          "subtitle": "Organize your course modules and lessons"
+        },
+        {
+          "type": "ActionBar",
+          "buttons": [
+            { "text": "Add Module", "type": "primary", "action": "add_module" },
+            { "text": "Bulk Upload", "type": "secondary", "action": "bulk_upload" },
+            { "text": "Reorder Content", "type": "secondary", "action": "reorder" }
+          ]
+        },
+        {
+          "type": "CourseStructure",
+          "modules": [
+            {
+              "id": 1,
+              "title": "Introduction to Java",
+              "order": 1,
+              "lessons": [
+                { "id": 1, "title": "What is Java?", "type": "video", "duration": "10:30", "status": "published" },
+                { "id": 2, "title": "Setting up Development Environment", "type": "video", "duration": "15:45", "status": "published" },
+                { "id": 3, "title": "Your First Java Program", "type": "video", "duration": "12:20", "status": "draft" }
+              ],
+              "actions": ["Edit", "Reorder", "Delete"]
+            },
+            {
+              "id": 2,
+              "title": "Java Fundamentals",
+              "order": 2,
+              "lessons": [
+                { "id": 4, "title": "Variables and Data Types", "type": "video", "duration": "18:30", "status": "published" },
+                { "id": 5, "title": "Control Structures", "type": "video", "duration": "22:15", "status": "published" },
+                { "id": 6, "title": "Practice Quiz", "type": "quiz", "questions": 10, "status": "published" }
+              ],
+              "actions": ["Edit", "Reorder", "Delete"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_name": "Lesson Creation/Edit",
+      "url": "/instructor/courses/{course_id}/modules/{module_id}/lessons/create",
+      "reference_image": "lesson_create.jpg",
+      "layout": "Form for creating or editing lesson content with video upload.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Dashboard", "My Courses", "Analytics", "Profile"],
+          "actions": ["Save Draft", "Preview", "Publish"]
+        },
+        {
+          "type": "Breadcrumbs",
+          "path": ["Dashboard", "My Courses", "Java Programming", "Module 1", "Create Lesson"]
+        },
+        {
+          "type": "Form",
+          "title": "Create New Lesson",
+          "fields": [
+            { "label": "Lesson Title", "placeholder": "Enter lesson title", "required": true },
+            { "label": "Lesson Description", "placeholder": "Brief description of the lesson", "type": "textarea" },
+            { "label": "Video File", "type": "file", "accept": "video/*", "required": true },
+            { "label": "Video URL (Alternative)", "placeholder": "Or paste video URL", "type": "url" },
+            { "label": "Lesson Duration", "placeholder": "e.g., 15:30", "type": "text" },
+            { "label": "Lesson Order", "placeholder": "Order in module", "type": "number" },
+            { "label": "Lesson Notes", "placeholder": "Additional notes or resources", "type": "textarea" }
+          ],
+          "buttons": [
+            { "text": "Create Lesson", "type": "primary" },
+            { "text": "Save Draft", "type": "secondary" },
+            { "text": "Cancel", "type": "outline" }
+          ]
+        },
+        {
+          "type": "VideoPreview",
+          "placeholder": "Video preview will appear here after upload"
+        }
+      ]
+    },
+    {
+      "page_name": "Instructor Analytics",
+      "url": "/instructor/analytics",
+      "reference_image": "instructor_analytics.jpg",
+      "layout": "Dashboard with charts, metrics, and detailed analytics.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Dashboard", "My Courses", "Analytics", "Profile"],
+          "actions": ["Export Data", "User Profile"]
+        },
+        {
+          "type": "PageTitle",
+          "title": "Analytics Dashboard",
+          "subtitle": "Detailed insights into your teaching performance"
+        },
+        {
+          "type": "MetricsGrid",
+          "metrics": [
+            { "title": "Total Revenue", "value": "$45,678", "change": "+12%", "period": "This month" },
+            { "title": "Total Students", "value": "1,234", "change": "+18%", "period": "This month" },
+            { "title": "Course Completions", "value": "789", "change": "+8%", "period": "This month" },
+            { "title": "Average Rating", "value": "4.8", "change": "+0.2", "period": "This month" }
+          ]
+        },
+        {
+          "type": "Section",
+          "title": "Enrollment Trends",
+          "chart": { "type": "line", "data": "monthly_enrollments", "period": "12 months" }
+        },
+        {
+          "type": "Section",
+          "title": "Course Performance",
+          "table": {
+            "columns": ["Course", "Students", "Completion Rate", "Rating", "Revenue"],
+            "data": [
+              { "Course": "Complete Java Programming", "Students": 456, "Completion Rate": "78%", "Rating": 4.7, "Revenue": "$12,340" },
+              { "Course": "Spring Boot Development", "Students": 234, "Completion Rate": "82%", "Rating": 4.9, "Revenue": "$8,890" },
+              { "Course": "Web Development Basics", "Students": 567, "Completion Rate": "65%", "Rating": 4.5, "Revenue": "$15,670" }
+            ]
+          }
+        },
+        {
+          "type": "Section",
+          "title": "Student Feedback",
+          "reviews": [
+            { "student": "John D.", "course": "Java Programming", "rating": 5, "comment": "Excellent course! Very detailed explanations." },
+            { "student": "Sarah M.", "course": "Spring Boot", "rating": 5, "comment": "Perfect for beginners. Great instructor!" },
+            { "student": "Mike R.", "course": "Web Development", "rating": 4, "comment": "Good content, could use more examples." }
+          ]
+        }
+      ]
+    },
+    {
+      "page_name": "Course Enrollments",
+      "url": "/instructor/courses/{course_id}/enrollments",
+      "reference_image": "course_enrollments.jpg",
+      "layout": "Table view of enrolled students with progress tracking.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Dashboard", "My Courses", "Analytics", "Profile"],
+          "actions": ["Export List", "Send Message"]
+        },
+        {
+          "type": "Breadcrumbs",
+          "path": ["Dashboard", "My Courses", "Java Programming", "Enrollments"]
+        },
+        {
+          "type": "PageTitle",
+          "title": "Course Enrollments",
+          "subtitle": "Complete Java Programming Course"
+        },
+        {
+          "type": "StatsBar",
+          "stats": [
+            { "label": "Total Enrolled", "value": "456" },
+            { "label": "Active Students", "value": "342" },
+            { "label": "Completed", "value": "78" },
+            { "label": "Average Progress", "value": "64%" }
+          ]
+        },
+        {
+          "type": "FilterBar",
+          "filters": [
+            { "type": "select", "label": "Status", "options": ["All", "Active", "Completed", "Inactive"] },
+            { "type": "select", "label": "Progress", "options": ["All", "0-25%", "26-50%", "51-75%", "76-100%"] },
+            { "type": "search", "placeholder": "Search students..." }
+          ]
+        },
+        {
+          "type": "Table",
+          "columns": ["Student", "Email", "Enrolled Date", "Progress", "Last Activity", "Status", "Actions"],
+          "data": [
+            {
+              "Student": "John Doe",
+              "Email": "john.doe@example.com",
+              "Enrolled Date": "2024-01-15",
+              "Progress": "85%",
+              "Last Activity": "2 days ago",
+              "Status": "Active",
+              "Actions": ["View Progress", "Send Message", "Certificate"]
+            },
+            {
+              "Student": "Sarah Johnson",
+              "Email": "sarah.j@example.com",
+              "Enrolled Date": "2024-01-10",
+              "Progress": "100%",
+              "Last Activity": "1 week ago",
+              "Status": "Completed",
+              "Actions": ["View Progress", "Send Message", "Certificate"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_name": "Student Course Browse",
+      "url": "/courses",
+      "reference_image": "course_browse.jpg",
+      "layout": "Grid layout with filtering and search capabilities.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Home", "Courses", "My Learning", "Wishlist"],
+          "actions": ["Search", "Sign Up", "Log In"]
+        },
+        {
+          "type": "PageTitle",
+          "title": "All Courses",
+          "subtitle": "Discover and learn new skills"
+        },
+        {
+          "type": "SearchAndFilter",
+          "search_bar": { "placeholder": "Search courses..." },
+          "filters": [
+            { "type": "category", "label": "Category", "options": ["All", "Programming", "Design", "Marketing", "Business"] },
+            { "type": "level", "label": "Level", "options": ["All", "Beginner", "Intermediate", "Advanced"] },
+            { "type": "rating", "label": "Rating", "options": ["All", "4+ Stars", "3+ Stars"] },
+            { "type": "price", "label": "Price", "options": ["All", "Free", "Paid"] }
+          ],
+          "sort": { "options": ["Most Popular", "Newest", "Rating", "Price: Low to High", "Price: High to Low"] }
+        },
+        {
+          "type": "CourseGrid",
+          "courses": [
+            {
+              "title": "Complete JavaScript Course 2024",
+              "instructor": "John Smith",
+              "rating": 4.8,
+              "reviews": 2340,
+              "price": "$89.99",
+              "image": "javascript-course.jpg",
+              "tags": ["Beginner", "Web Development"]
+            },
+            {
+              "title": "Advanced React Development",
+              "instructor": "Jane Doe",
+              "rating": 4.9,
+              "reviews": 1567,
+              "price": "$129.99",
+              "image": "react-course.jpg",
+              "tags": ["Advanced", "Frontend"]
+            }
+          ]
+        },
+        {
+          "type": "Pagination",
+          "current_page": 1,
+          "total_pages": 25,
+          "items_per_page": 12
+        }
+      ]
+    },
+    {
+      "page_name": "Student Profile",
+      "url": "/profile",
+      "reference_image": "student_profile.jpg",
+      "layout": "Profile management with personal info, achievements, and settings.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Home", "Courses", "My Learning", "Wishlist"],
+          "actions": ["Notifications", "Settings"]
+        },
+        {
+          "type": "PageTitle",
+          "title": "My Profile",
+          "subtitle": "Manage your account and learning preferences"
+        },
+        {
+          "type": "ProfileHeader",
+          "avatar": "user-avatar.jpg",
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "member_since": "January 2024",
+          "total_courses": 12,
+          "completed_courses": 8,
+          "certificates": 5
+        },
+        {
+          "type": "Tabs",
+          "tabs": ["Personal Info", "Learning Progress", "Certificates", "Settings"],
+          "active_tab": "Personal Info"
+        },
+        {
+          "type": "Form",
+          "title": "Personal Information",
+          "fields": [
+            { "label": "Full Name", "value": "John Doe", "type": "text" },
+            { "label": "Email", "value": "john.doe@example.com", "type": "email" },
+            { "label": "Bio", "value": "Passionate learner interested in technology", "type": "textarea" },
+            { "label": "Location", "value": "New York, USA", "type": "text" },
+            { "label": "Website", "value": "https://johndoe.com", "type": "url" }
+          ],
+          "buttons": [
+            { "text": "Save Changes", "type": "primary" },
+            { "text": "Cancel", "type": "secondary" }
+          ]
+        },
+        {
+          "type": "Section",
+          "title": "Learning Achievements",
+          "achievements": [
+            { "title": "First Course Completed", "description": "Completed your first course", "earned": true },
+            { "title": "Quick Learner", "description": "Completed 5 courses in a month", "earned": true },
+            { "title": "Programming Master", "description": "Completed 10 programming courses", "earned": false }
+          ]
+        }
+      ]
+    },
+    {
+      "page_name": "Student Wishlist",
+      "url": "/wishlist",
+      "reference_image": "student_wishlist.jpg",
+      "layout": "Grid of saved courses with quick actions.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Home", "Courses", "My Learning", "Wishlist"],
+          "actions": ["Search", "User Profile"]
+        },
+        {
+          "type": "PageTitle",
+          "title": "My Wishlist",
+          "subtitle": "Courses you want to take later"
+        },
+        {
+          "type": "ActionBar",
+          "buttons": [
+            { "text": "Clear All", "type": "outline" },
+            { "text": "Move All to Cart", "type": "primary" }
+          ],
+          "stats": { "total_items": 8, "total_value": "$567.92" }
+        },
+        {
+          "type": "CourseGrid",
+          "courses": [
+            {
+              "title": "Advanced Python Programming",
+              "instructor": "Dr. Sarah Chen",
+              "rating": 4.7,
+              "reviews": 1890,
+              "price": "$99.99",
+              "discount": "50% off",
+              "image": "python-course.jpg",
+              "actions": ["Add to Cart", "Remove from Wishlist", "Preview"]
+            },
+            {
+              "title": "Machine Learning Fundamentals",
+              "instructor": "Prof. Michael Brown",
+              "rating": 4.9,
+              "reviews": 2567,
+              "price": "$149.99",
+              "image": "ml-course.jpg",
+              "actions": ["Add to Cart", "Remove from Wishlist", "Preview"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_name": "Course Search Results",
+      "url": "/search",
+      "reference_image": "search_results.jpg",
+      "layout": "Search results with advanced filtering options.",
+      "components": [
+        {
+          "type": "Header",
+          "logo": "EduHub",
+          "links": ["Home", "Courses", "My Learning", "Wishlist"],
+          "actions": ["Search", "User Profile"]
+        },
+        {
+          "type": "SearchHeader",
+          "query": "javascript",
+          "results_count": 1247,
+          "suggestions": ["JavaScript Basics", "React.js", "Node.js", "TypeScript"]
+        },
+        {
+          "type": "FilterSidebar",
+          "filters": [
+            {
+              "category": "Topic",
+              "options": ["Web Development", "Frontend", "Backend", "Full Stack"]
+            },
+            {
+              "category": "Level",
+              "options": ["Beginner", "Intermediate", "Advanced", "All Levels"]
+            },
+            {
+              "category": "Duration",
+              "options": ["0-2 hours", "3-6 hours", "7-17 hours", "17+ hours"]
+            },
+            {
+              "category": "Features",
+              "options": ["Subtitles", "Quizzes", "Coding Exercises", "Certificate"]
+            }
+          ]
+        },
+        {
+          "type": "SearchResults",
+          "sort_options": ["Most Relevant", "Most Popular", "Highest Rated", "Newest"],
+          "courses": [
+            {
+              "title": "The Complete JavaScript Course 2024",
+              "instructor": "Jonas Schmedtmann",
+              "rating": 4.7,
+              "reviews": 5467,
+              "students": 89234,
+              "duration": "69 total hours",
+              "updated": "December 2023",
+              "price": "$84.99",
+              "bestseller": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

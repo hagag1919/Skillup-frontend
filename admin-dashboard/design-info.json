@@ -1,0 +1,417 @@
+{
+  "platform_info": {
+    "name": "SkillUp",
+    "brand_color": "#7c3aed",
+    "logo": "M symbol with purple gradient",
+    "design_style": "Modern, clean, educational platform"
+  },
+  "layout_structure": {
+    "sidebar": {
+      "width": "240px",
+      "background": "#f8fafc",
+      "border": "1px solid #e2e8f0",
+      "sections": [
+        {
+          "title": "Main Navigation",
+          "items": [
+            {"icon": "home", "label": "Home", "active": false},
+            {"icon": "users", "label": "Users", "active": false},
+            {"icon": "layout", "label": "Site", "active": false},
+            {"icon": "trending-up", "label": "Sales", "active": false},
+            {"icon": "mail", "label": "Emails", "active": false},
+            {"icon": "grid", "label": "App Hub", "active": false},
+            {"icon": "settings", "label": "Settings", "active": false}
+          ]
+        },
+        {
+          "title": "PRODUCTS",
+          "badge": "1",
+          "items": [
+            {"icon": "book", "label": "Courses", "active": true, "background": "#1f2937"},
+            {"icon": "message-square", "label": "Coaching", "active": false},
+            {"icon": "download", "label": "Digital Downloads", "active": false},
+            {"icon": "video", "label": "Webinar", "active": false}
+          ]
+        },
+        {
+          "title": "OTHER",
+          "items": [
+            {"icon": "users", "label": "Memberships", "active": false},
+            {"icon": "package", "label": "Bundles", "active": false},
+            {"icon": "credit-card", "label": "Plan", "active": false}
+          ]
+        }
+      ],
+      "bottom_profile": {
+        "name": "Elux Academy",
+        "role": "School Admin",
+        "avatar": "E",
+        "background": "#1f2937"
+      }
+    },
+    "header": {
+      "height": "64px",
+      "background": "#ffffff",
+      "border_bottom": "1px solid #e5e7eb",
+      "elements": {
+        "trial_banner": {
+          "text": "You have 30 days left on your free trial of the Personal plan.",
+          "cta": "Upgrade Now",
+          "color": "#7c3aed",
+          "dismissible": true
+        },
+        "breadcrumb": {
+          "items": ["Courses", "Edit", "How to launch product fast in 2025"]
+        },
+        "actions": {
+          "done_button": {"style": "outline", "text": "Done"},
+          "preview_button": {"style": "filled", "text": "Preview", "color": "#1f2937"},
+          "publish_button": {"style": "filled", "text": "Publish", "color": "#1f2937"}
+        }
+      }
+    },
+    "main_content": {
+      "padding": "24px",
+      "background": "#ffffff"
+    }
+  },
+  "page_layouts": {
+    "curriculum_lesson_edit": {
+      "title": "Curriculum Lesson",
+      "sections": [
+        {
+          "type": "lesson_content",
+          "title": "Early Validation and Iteration",
+          "status": "published",
+          "content": {
+            "steps": [
+              {
+                "number": 1,
+                "title": "Secure your audience before launch",
+                "description": "Before a new product launch, ensure you have a solid group of people interested in what you're offering.",
+                "illustration": {
+                  "type": "custom_svg",
+                  "style": "colorful_flat",
+                  "elements": ["lightbulb", "gear", "person", "charts", "geometric_shapes"],
+                  "color_scheme": ["#fbbf24", "#8b5cf6", "#06b6d4", "#f472b6", "#10b981"]
+                }
+              },
+              {
+                "number": 2,
+                "title": "Start marketing early",
+                "description": "One key to a successful launch is building relationships with potential customers well before opening an online store."
+              }
+            ]
+          }
+        }
+      ],
+      "sidebar_panel": {
+        "title": "Add Content",
+        "categories": [
+          {
+            "name": "Content",
+            "items": [
+              {"icon": "type", "label": "Text", "active": false},
+              {"icon": "image", "label": "Image", "active": true, "color": "#7c3aed"},
+              {"icon": "video", "label": "Video", "active": false}
+            ]
+          },
+          {
+            "name": "Tools",
+            "items": [
+              {"icon": "file-text", "label": "PDF Viewer", "active": false},
+              {"icon": "headphones", "label": "Audio", "active": false},
+              {"icon": "flag", "label": "Banner", "active": false}
+            ]
+          },
+          {
+            "name": "Resources",
+            "items": [
+              {"icon": "folder", "label": "Resource", "active": false},
+              {"icon": "code", "label": "Code", "active": false},
+              {"icon": "link", "label": "Embed", "active": false}
+            ]
+          },
+          {
+            "name": "Educational Tools",
+            "items": [
+              {"icon": "help-circle", "label": "Quiz", "active": false},
+              {"icon": "edit", "label": "Open-ended", "active": false}
+            ]
+          },
+          {
+            "name": "Marketing Tools",
+            "items": [
+              {"icon": "shopping-cart", "label": "Upsell", "active": false},
+              {"icon": "gift", "label": "Referral", "active": false}
+            ]
+          }
+        ]
+      }
+    },
+    "curriculum_overview": {
+      "title": "Curriculum Lesson",
+      "actions": {
+        "bulk_edit": {"style": "outline"},
+        "new_section": {"style": "outline", "icon": "plus"}
+      },
+      "sections": [
+        {
+          "name": "Introduction",
+          "type": "section",
+          "lessons": [
+            {
+              "icon": "play",
+              "title": "Early Validation and Iteration",
+              "content": "1 Text & Images",
+              "status": "published",
+              "color": "#7c3aed"
+            },
+            {
+              "icon": "play",
+              "title": "Pre-Launch Marketing and Buzz",
+              "content": "1 Text & Images",
+              "status": "publish",
+              "color": "#7c3aed"
+            },
+            {
+              "icon": "play",
+              "title": "Streamlined Marketing and Launch",
+              "content": "1 Text & Images",
+              "status": "publish",
+              "color": "#7c3aed"
+            },
+            {
+              "icon": "edit",
+              "title": "Specific Examples of Pre-Launch Marketing",
+              "content": "1 Text & Images",
+              "status": "draft",
+              "color": "#6b7280"
+            }
+          ]
+        },
+        {
+          "name": "Section 2",
+          "type": "section",
+          "lessons": [
+            {
+              "icon": "play",
+              "title": "Early Validation and Iteration",
+              "content": "1 Text & Images",
+              "status": "publish",
+              "color": "#7c3aed"
+            }
+          ]
+        }
+      ],
+      "actions_per_item": ["Quick actions", "More options"],
+      "floating_elements": {
+        "drip_indicator": true,
+        "quick_actions_dropdown": true
+      }
+    },
+    "course_overview": {
+      "title": "How to launch product fast in 2025",
+      "sections": [
+        {
+          "type": "curriculum_preview",
+          "title": "Curriculum Preview",
+          "action": "Edit Curriculum",
+          "lessons": [
+            {
+              "section": "Introduction",
+              "items": [
+                {"icon": "play", "title": "Early Validation and Iteration", "content": "1 Text & Images", "color": "#7c3aed"},
+                {"icon": "play", "title": "Pre-Launch Marketing and Buzz", "content": "1 Text & Images", "color": "#7c3aed"},
+                {"icon": "play", "title": "Streamlined Marketing and Launch", "content": "1 Text & Images", "color": "#7c3aed"},
+                {"icon": "play", "title": "Key Considerations for 2025", "content": "1 Text & Images", "color": "#7c3aed"},
+                {"icon": "edit", "title": "Specific Examples of Pre-Launch Marketing", "content": "1 Text & Images", "status": "Draft", "color": "#6b7280"}
+              ]
+            }
+          ]
+        },
+        {
+          "type": "pricing_plan",
+          "title": "Pricing Plan",
+          "description": "Set your course as paid or free with our flexible pricing plans. Once created, you'll be able to preview and manage the checkout experience.",
+          "action": "Create a Pricing Plan",
+          "help_section": {
+            "icon": "help-circle",
+            "title": "Need help pricing your course?",
+            "description": "User our guide to determine the perfect price",
+            "background": "#dcfce7"
+          }
+        }
+      ],
+      "sidebar": {
+        "thumbnail_section": {
+          "title": "Thumbnail",
+          "description": "Max 10MB file size, only png and jpg files.",
+          "illustration": "same colorful flat design",
+          "actions": ["Reset", "Upload"]
+        },
+        "help_sections": [
+          {
+            "title": "How to create an online course",
+            "description": "Get step-by-step instructions to make your first course.",
+            "action": "See How"
+          },
+          {
+            "title": "Edit your sales page",
+            "description": "When you're ready to sell, customize your sales pages.",
+            "action": "See How"
+          }
+        ]
+      }
+    }
+  },
+  "design_system": {
+    "colors": {
+      "primary": "#7c3aed",
+      "primary_light": "#a78bfa",
+      "primary_dark": "#5b21b6",
+      "secondary": "#1f2937",
+      "success": "#10b981",
+      "warning": "#fbbf24",
+      "info": "#06b6d4",
+      "danger": "#ef4444",
+      "light": "#f8fafc",
+      "muted": "#6b7280",
+      "border": "#e5e7eb"
+    },
+    "typography": {
+      "font_family": "Inter, system-ui, sans-serif",
+      "sizes": {
+        "xs": "12px",
+        "sm": "14px",
+        "base": "16px",
+        "lg": "18px",
+        "xl": "20px",
+        "2xl": "24px",
+        "3xl": "30px"
+      },
+      "weights": {
+        "normal": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700
+      }
+    },
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "2xl": "48px"
+    },
+    "border_radius": {
+      "sm": "4px",
+      "md": "6px",
+      "lg": "8px",
+      "xl": "12px",
+      "full": "9999px"
+    },
+    "shadows": {
+      "sm": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      "md": "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+      "lg": "0 10px 15px -3px rgb(0 0 0 / 0.1)"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": {
+        "background": "#1f2937",
+        "color": "#ffffff",
+        "padding": "8px 16px",
+        "border_radius": "6px",
+        "font_weight": 500
+      },
+      "secondary": {
+        "background": "transparent",
+        "color": "#374151",
+        "border": "1px solid #d1d5db",
+        "padding": "8px 16px",
+        "border_radius": "6px"
+      },
+      "accent": {
+        "background": "#7c3aed",
+        "color": "#ffffff",
+        "padding": "8px 16px",
+        "border_radius": "6px"
+      }
+    },
+    "cards": {
+      "lesson_card": {
+        "background": "#ffffff",
+        "border": "1px solid #e5e7eb",
+        "border_radius": "8px",
+        "padding": "16px",
+        "shadow": "0 1px 3px 0 rgb(0 0 0 / 0.1)"
+      },
+      "section_card": {
+        "background": "#f9fafb",
+        "border_radius": "8px",
+        "padding": "20px"
+      }
+    },
+    "icons": {
+      "style": "lucide",
+      "size": "16px",
+      "stroke_width": 2
+    },
+    "status_badges": {
+      "published": {
+        "background": "#dcfce7",
+        "color": "#16a34a",
+        "text": "Published"
+      },
+      "draft": {
+        "background": "#f3f4f6",
+        "color": "#6b7280",
+        "text": "Draft"
+      }
+    }
+  },
+  "illustrations": {
+    "style": "flat_colorful",
+    "elements": [
+      "lightbulb (innovation)",
+      "gears (process)",
+      "person (user-focused)",
+      "charts/graphs (analytics)",
+      "geometric shapes (modern)",
+      "laptop/computer (technology)",
+      "graduation cap (education)"
+    ],
+    "color_palette": [
+      "#fbbf24",
+      "#8b5cf6", 
+      "#06b6d4",
+      "#f472b6",
+      "#10b981",
+      "#ef4444"
+    ]
+  },
+  "interactions": {
+    "hover_effects": {
+      "buttons": "opacity 0.9, slight scale",
+      "cards": "shadow elevation",
+      "sidebar_items": "background color change"
+    },
+    "animations": {
+      "transitions": "150ms ease-in-out",
+      "page_loads": "fade in",
+      "dropdowns": "slide down"
+    }
+  },
+  "responsive_behavior": {
+    "breakpoints": {
+      "mobile": "768px",
+      "tablet": "1024px", 
+      "desktop": "1280px"
+    },
+    "sidebar_collapse": "mobile first",
+    "content_stacking": "vertical on mobile"
+  }
+}
