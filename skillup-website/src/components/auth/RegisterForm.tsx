@@ -89,31 +89,34 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-2xl w-full space-y-8">
         <div>
           <div className="flex justify-center">
-            <div className="bg-primary text-white p-3 rounded-default">
-              <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+            <div className="bg-blue-600 text-white p-4 rounded-xl shadow-lg">
+              <svg className="h-10 w-10" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"/>
               </svg>
             </div>
           </div>
-          <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
-            Create your account
+          <h2 className="mt-8 text-center text-4xl font-bold text-gray-900">
+            Join SkillUp today
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{' '}
+          <p className="mt-4 text-center text-lg text-gray-600">
+            Start your learning journey or share your expertise
+          </p>
+          <p className="mt-2 text-center text-sm text-gray-500">
+            Already have an account?{' '}
             <Link
               to="/login"
-              className="font-medium text-primary hover:text-blue-600"
+              className="font-semibold text-blue-600 hover:text-blue-500 transition-colors"
             >
-              sign in to your existing account
+              Sign in here
             </Link>
           </p>
         </div>
         
-        <Card className="mt-8">
+        <Card className="mt-10 p-8 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
@@ -141,52 +144,61 @@ const RegisterForm: React.FC = () => {
               required
             />
             
-            <Input
-              label="Password"
-              type="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange('password')}
-              error={errors.password}
-              required
-            />
-            
-            <Input
-              label="Confirm Password"
-              type="password"
-              placeholder="Confirm your password"
-              value={formData.confirmPassword}
-              onChange={handleChange('confirmPassword')}
-              error={errors.confirmPassword}
-              required
-            />
+            {/* Password fields in a row for better space usage */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Input
+                label="Password"
+                type="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange('password')}
+                error={errors.password}
+                required
+              />
+              
+              <Input
+                label="Confirm Password"
+                type="password"
+                placeholder="Confirm your password"
+                value={formData.confirmPassword}
+                onChange={handleChange('confirmPassword')}
+                error={errors.confirmPassword}
+                required
+              />
+            </div>
 
             <div>
-              <label htmlFor="role-select" className="block text-sm font-medium text-gray-700 mb-1">
-                I want to join as
+              <label htmlFor="role-select" className="block text-sm font-medium text-gray-700 mb-2">
+                I want to join as <span className="text-red-500">*</span>
               </label>
               <select
                 id="role-select"
                 value={formData.role}
                 onChange={(e) => setFormData(prev => ({ ...prev, role: e.target.value as 'STUDENT' | 'INSTRUCTOR' }))}
-                className="form-input"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                required
               >
-                <option value="STUDENT">Student</option>
-                <option value="INSTRUCTOR">Instructor</option>
+                <option value="STUDENT">Student - Learn from courses</option>
+                <option value="INSTRUCTOR">Instructor - Create and teach courses</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
                 Bio (optional)
               </label>
               <textarea
-                placeholder="Tell us about yourself"
+                id="bio"
+                placeholder="Tell us about yourself, your interests, or your expertise..."
                 value={formData.bio}
                 onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-default focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                maxLength={500}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
               />
+              <p className="text-sm text-gray-500 mt-1">
+                {formData.bio.length}/500 characters
+              </p>
             </div>
 
             <Button

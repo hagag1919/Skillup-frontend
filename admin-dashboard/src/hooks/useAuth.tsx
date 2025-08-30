@@ -21,10 +21,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           setUser(userData);
         } catch (error) {
           console.error('Token validation failed:', error);
-          // Clear invalid token
+          // Clear invalid token and reset auth state
           localStorage.removeItem('admin_token');
           setUser(null);
+          // Force redirect to login if we're not already there
+          if (window.location.pathname !== '/login') {
+            window.location.href = '/login';
+          }
         }
+      } else {
+        // No token found, ensure user is null
+        setUser(null);
       }
       setLoading(false);
     };

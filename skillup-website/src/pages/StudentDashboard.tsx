@@ -45,8 +45,23 @@ const StudentDashboard: React.FC = () => {
       return;
     }
 
+    if (user?.role !== 'STUDENT') {
+      // Redirect based on user role
+      switch (user?.role) {
+        case 'INSTRUCTOR':
+          navigate('/instructor/dashboard');
+          break;
+        case 'ADMIN':
+          navigate('/admin/dashboard');
+          break;
+        default:
+          navigate('/');
+      }
+      return;
+    }
+
     fetchDashboardData();
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, user, navigate]);
 
   const fetchDashboardData = async () => {
     try {

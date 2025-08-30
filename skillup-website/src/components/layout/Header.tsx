@@ -34,24 +34,84 @@ const Header: React.FC = () => {
             {/* Navigation links for authenticated users */}
             {isAuthenticated && (
               <nav className="hidden md:flex space-x-6">
-                <Link 
-                  to="/dashboard" 
-                  className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
-                >
-                  Dashboard
-                </Link>
-                <Link 
-                  to="/courses" 
-                  className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
-                >
-                  My Courses
-                </Link>
-                <Link 
-                  to="/browse" 
-                  className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
-                >
-                  Browse
-                </Link>
+                {user?.role === 'STUDENT' && (
+                  <>
+                    <Link 
+                      to="/student/dashboard" 
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    >
+                      Dashboard
+                    </Link>
+                    <Link 
+                      to="/courses" 
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    >
+                      My Courses
+                    </Link>
+                    <Link 
+                      to="/browse" 
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    >
+                      Browse
+                    </Link>
+                  </>
+                )}
+                {user?.role === 'INSTRUCTOR' && (
+                  <>
+                    <Link 
+                      to="/instructor/dashboard" 
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    >
+                      Dashboard
+                    </Link>
+                    <Link 
+                      to="/instructor/courses" 
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    >
+                      My Courses
+                    </Link>
+                    <Link 
+                      to="/instructor/analytics" 
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    >
+                      Analytics
+                    </Link>
+                    <Link 
+                      to="/browse" 
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    >
+                      Browse
+                    </Link>
+                  </>
+                )}
+                {user?.role === 'ADMIN' && (
+                  <>
+                    <Link 
+                      to="/admin/dashboard" 
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    >
+                      Dashboard
+                    </Link>
+                    <Link 
+                      to="/admin/users" 
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    >
+                      Users
+                    </Link>
+                    <Link 
+                      to="/admin/courses" 
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    >
+                      Courses
+                    </Link>
+                    <Link 
+                      to="/admin/analytics" 
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    >
+                      Analytics
+                    </Link>
+                  </>
+                )}
               </nav>
             )}
           </div>

@@ -147,6 +147,7 @@ const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'connecting'>('connecting');
   const [searchTerm, setSearchTerm] = useState('');
   const [roleFilter, setRoleFilter] = useState<string>('all');
   const [userModalOpen, setUserModalOpen] = useState(false);
@@ -162,9 +163,18 @@ const UsersPage: React.FC = () => {
     try {
       setLoading(true);
       setError('');
+      setConnectionStatus('connecting');
       
-      // Debug: Check authentication status
-      console.log('Auth Status:', apiService.getCurrentAuthStatus());
+      // Debug logging
+      console.log('Fetching users with params:', { page, search, role, pageSize: pagination.size });
+      
+      // Check if user is authenticated before making API calls
+      const authStatus = apiService.getCurrentAuthStatus();
+      if (!authStatus.hasToken) {
+        setError('Not authenticated. Please log in again.');
+        setConnectionStatus('disconnected');
+        return;
+      }
       
       let response: PaginatedResponse<User>;
       
@@ -189,6 +199,8 @@ const UsersPage: React.FC = () => {
         });
       }
       
+      console.log('Received response:', response);
+      
       setUsers(response.content);
       setPagination({
         page: response.page,
@@ -196,9 +208,31 @@ const UsersPage: React.FC = () => {
         totalElements: response.totalElements,
         totalPages: response.totalPages,
       });
+      setConnectionStatus('connected');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch users');
-      // Set mock data for demo
+      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch users';
+      
+      // Check if it's a network error
+      const isNetworkError = errorMessage.includes('Failed to fetch') || 
+                            errorMessage.includes('ERR_INCOMPLETE_CHUNKED_ENCODING') ||
+                            errorMessage.includes('network') ||
+                            errorMessage.includes('connection');
+      
+      if (isNetworkError) {
+        setError('Connection Error\n\nUsing demo data. Failed to fetch');
+        setConnectionStatus('disconnected');
+      } else {
+        setError(errorMessage);
+        setConnectionStatus('disconnected');
+      }
+      
+      // If it's an authentication error, redirect to login
+      if (errorMessage.includes('Authentication required') || errorMessage.includes('401')) {
+        window.location.href = '/login';
+        return; // Don't show mock data for auth errors
+      }
+      
+      // Set mock data for demo when there's a network error
       const mockUsers: User[] = [
         {
           id: '1',
@@ -224,18 +258,52 @@ const UsersPage: React.FC = () => {
           bio: 'Platform administrator',
           createdAt: '2024-01-01T09:00:00Z',
         },
+        {
+          id: '4',
+          name: 'Sarah Johnson',
+          email: 'sarah.johnson@example.com',
+          role: 'STUDENT',
+          bio: 'Marketing professional learning new skills',
+          createdAt: '2024-01-20T11:00:00Z',
+        },
+        {
+          id: '5',
+          name: 'Mike Wilson',
+          email: 'mike.wilson@example.com',
+          role: 'INSTRUCTOR',
+          bio: 'Data science expert and course creator',
+          createdAt: '2024-01-05T16:00:00Z',
+        },
       ];
-      setUsers(mockUsers);
+      
+      // Filter mock data based on current filters
+      let filteredUsers = mockUsers;
+      if (roleFilter !== 'all') {
+        filteredUsers = mockUsers.filter(user => user.role === roleFilter);
+      }
+      if (search) {
+        filteredUsers = filteredUsers.filter(user => 
+          user.name.toLowerCase().includes(search.toLowerCase()) ||
+          user.email.toLowerCase().includes(search.toLowerCase())
+        );
+      }
+      
+      // Simulate pagination for demo data
+      const startIndex = page * pagination.size;
+      const endIndex = startIndex + pagination.size;
+      const paginatedUsers = filteredUsers.slice(startIndex, endIndex);
+      
+      setUsers(paginatedUsers);
       setPagination({
-        page: 0,
-        size: 10,
-        totalElements: mockUsers.length,
-        totalPages: 1,
+        page,
+        size: pagination.size,
+        totalElements: filteredUsers.length,
+        totalPages: Math.ceil(filteredUsers.length / pagination.size),
       });
     } finally {
       setLoading(false);
     }
-  }, [pagination.size]);
+  }, [pagination.size, roleFilter]);
 
   useEffect(() => {
     fetchUsers();
@@ -292,6 +360,8 @@ const UsersPage: React.FC = () => {
   };
 
   const handlePageChange = (newPage: number) => {
+    // Clear any existing errors when changing pages
+    setError('');
     fetchUsers(newPage, searchTerm, roleFilter);
   };
 
@@ -300,7 +370,26 @@ const UsersPage: React.FC = () => {
       {/* Page Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Users</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-3xl font-bold text-gray-900">Users</h1>
+            {/* Connection Status Indicator */}
+            <div className="flex items-center gap-2">
+              <div className={`w-2 h-2 rounded-full ${
+                connectionStatus === 'connected' ? 'bg-green-500' :
+                connectionStatus === 'connecting' ? 'bg-yellow-500 animate-pulse' :
+                'bg-red-500'
+              }`} />
+              <span className={`text-xs font-medium ${
+                connectionStatus === 'connected' ? 'text-green-600' :
+                connectionStatus === 'connecting' ? 'text-yellow-600' :
+                'text-red-600'
+              }`}>
+                {connectionStatus === 'connected' ? 'Connected' :
+                 connectionStatus === 'connecting' ? 'Connecting...' :
+                 'Offline'}
+              </span>
+            </div>
+          </div>
           <p className="text-gray-600 mt-2">
             Manage all users on your platform
           </p>
@@ -324,17 +413,41 @@ const UsersPage: React.FC = () => {
                   ? 'You need admin privileges to access this dashboard. Please log in with an admin account.'
                   : error.includes('Authentication required')
                   ? 'Your session has expired. Please log in again.'
+                  : error.includes('Connection Error')
+                  ? 'Unable to connect to server. Showing demo data instead.'
                   : `Using demo data. ${error}`
                 }
               </p>
-              {(error.includes('Access denied') || error.includes('Authentication required')) && (
-                <button 
-                  onClick={() => window.location.href = '/login'}
-                  className="text-sm text-red-600 hover:text-red-800 underline mt-2"
-                >
-                  Go to Login
-                </button>
-              )}
+              <div className="mt-2 flex gap-2">
+                {(error.includes('Access denied') || error.includes('Authentication required')) && (
+                  <button 
+                    onClick={() => window.location.href = '/login'}
+                    className="text-sm text-red-600 hover:text-red-800 underline"
+                  >
+                    Go to Login
+                  </button>
+                )}
+                {error.includes('Connection Error') && (
+                  <button 
+                    onClick={() => {
+                      setError('');
+                      setConnectionStatus('connecting');
+                      fetchUsers(pagination.page, searchTerm, roleFilter);
+                    }}
+                    disabled={loading || connectionStatus === 'connecting'}
+                    className="text-sm bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white px-3 py-1 rounded transition-colors flex items-center gap-1"
+                  >
+                    {loading || connectionStatus === 'connecting' ? (
+                      <>
+                        <div className="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin" />
+                        Retrying...
+                      </>
+                    ) : (
+                      'Retry Connection'
+                    )}
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

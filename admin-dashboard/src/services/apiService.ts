@@ -15,6 +15,15 @@ import type {
 
 const BASE_URL = 'http://localhost:8888/api';
 
+// Global authentication error handler
+const handleAuthError = () => {
+  localStorage.removeItem('admin_token');
+  // Only redirect if not already on login page
+  if (window.location.pathname !== '/login') {
+    window.location.href = '/login';
+  }
+};
+
 class ApiService {
   private getAuthToken(): string | null {
     return localStorage.getItem('admin_token');
@@ -63,7 +72,7 @@ class ApiService {
   }
 
   // Enhanced error reporting
-  private reportClientError(method: string, error: string, parameters?: any): void {
+  private reportClientError(method: string, error: string, parameters?: Record<string, unknown>): void {
     console.error(`API Client Error in ${method}:`, {
       error,
       parameters,
@@ -76,7 +85,7 @@ class ApiService {
     // Example: sendToErrorTrackingService({ method, error, parameters });
   }
 
-  private reportServerError(method: string, response: Response, parameters?: any): void {
+  private reportServerError(method: string, response: Response, parameters?: Record<string, unknown>): void {
     console.error(`API Server Error in ${method}:`, {
       status: response.status,
       statusText: response.statusText,
@@ -88,6 +97,25 @@ class ApiService {
     
     // In a real app, you might send this to an error tracking service
     // Example: sendToErrorTrackingService({ method, response, parameters });
+  }
+
+  // Health check method
+  async checkServerHealth(): Promise<boolean> {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
+      const response = await fetch(`${BASE_URL}/health`, {
+        method: 'GET',
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+      return response.ok;
+    } catch (error) {
+      console.warn('Server health check failed:', error);
+      return false;
+    }
   }
 
   // Debug method to check current authentication status
@@ -121,8 +149,17 @@ class ApiService {
         errorData = { message: `Server error (${response.status})` };
       }
       
+      // Log detailed error information for debugging
+      console.error(`API Error [${methodName || 'unknown'}]:`, {
+        status: response.status,
+        statusText: response.statusText,
+        url: response.url,
+        errorData,
+        parameters
+      });
+      
       if (response.status === 401) {
-        localStorage.removeItem('admin_token'); // Clear invalid token
+        handleAuthError(); // Use global auth error handler
         throw new Error('Authentication required. Please log in again.');
       } else if (response.status === 403) {
         throw new Error('Access denied. Admin privileges required.');
@@ -214,41 +251,51 @@ class ApiService {
   }
 
   async validateToken(): Promise<User> {
-    const response = await fetch(`${BASE_URL}/auth/validate`, {
-      headers: this.getAuthHeaders(),
-    });
-    
-    const apiResponse = await this.handleResponse<{
-      success: boolean;
-      data: {
-        id: number;
-        email: string;
-        name: string;
-        role: 'ADMIN' | 'INSTRUCTOR' | 'STUDENT';
-        bio?: string;
-        createdAt?: string;
-        updatedAt?: string;
-      };
-    }>(response);
-    
-    // Transform API response to match expected User type
-    const user = {
-      id: apiResponse.data.id.toString(),
-      name: apiResponse.data.name,
-      email: apiResponse.data.email,
-      role: apiResponse.data.role,
-      bio: apiResponse.data.bio,
-      createdAt: apiResponse.data.createdAt,
-      updatedAt: apiResponse.data.updatedAt,
-    };
-    
-    // Validate that user has admin privileges
-    if (user.role !== 'ADMIN') {
-      localStorage.removeItem('admin_token'); // Clear token for non-admin user
-      throw new Error('Access denied. Admin privileges required to access this dashboard.');
+    const token = this.getAuthToken();
+    if (!token) {
+      throw new Error('No authentication token found');
     }
-    
-    return user;
+
+    try {
+      const response = await fetch(`${BASE_URL}/auth/validate`, {
+        headers: this.getAuthHeaders(),
+      });
+      
+      const apiResponse = await this.handleResponse<{
+        success: boolean;
+        data: {
+          id: number;
+          email: string;
+          name: string;
+          role: 'ADMIN' | 'INSTRUCTOR' | 'STUDENT';
+          bio?: string;
+          createdAt?: string;
+          updatedAt?: string;
+        };
+      }>(response, 'validateToken');
+      
+      const user = {
+        id: apiResponse.data.id.toString(),
+        name: apiResponse.data.name,
+        email: apiResponse.data.email,
+        role: apiResponse.data.role,
+        bio: apiResponse.data.bio,
+        createdAt: apiResponse.data.createdAt,
+        updatedAt: apiResponse.data.updatedAt,
+      };
+      
+      if (user.role !== 'ADMIN') {
+        handleAuthError();
+        throw new Error('Access denied. Admin privileges required to access this dashboard.');
+      }
+      
+      return user;
+    } catch (error) {
+      if (error instanceof Error && error.message.includes('Authentication required')) {
+        handleAuthError();
+      }
+      throw error;
+    }
   }
 
   logout(): void {
@@ -322,14 +369,12 @@ class ApiService {
     }
   }
 
-  // User Management
   async getAllUsers(params?: {
     page?: number;
     size?: number;
     role?: string;
   }): Promise<PaginatedResponse<User>> {
     try {
-      // Validate parameters
       if (params) {
         this.validatePaginationParams(params);
         
@@ -345,16 +390,50 @@ class ApiService {
       if (params?.size !== undefined) searchParams.append('size', params.size.toString());
       if (params?.role) searchParams.append('role', params.role);
 
-      const response = await fetch(`${BASE_URL}/admin/users?${searchParams}`, {
-        headers: this.getAuthHeaders(),
-      });
+      let lastError: Error | null = null;
+      const maxRetries = 2;
       
-      const apiResponse = await this.handleResponse<{
-        success: boolean;
-        data: PaginatedResponse<User>;
-      }>(response, 'getAllUsers', params);
+      for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+          const response = await fetch(`${BASE_URL}/admin/users?${searchParams}`, {
+            headers: this.getAuthHeaders(),
+            signal: controller.signal,
+          });
+
+          clearTimeout(timeoutId);
+          
+          const apiResponse = await this.handleResponse<{
+            success: boolean;
+            data: PaginatedResponse<User>;
+          }>(response, 'getAllUsers', params);
+          
+          return apiResponse.data;
+        } catch (error) {
+          lastError = error instanceof Error ? error : new Error('Unknown error');
+          console.warn(`Attempt ${attempt} failed for getAllUsers:`, lastError.message);
+          
+          // If it's an auth error, don't retry
+          if (lastError.message.includes('Authentication required') || 
+              lastError.message.includes('401') ||
+              lastError.message.includes('403')) {
+            throw lastError;
+          }
+          
+          // For network errors, wait before retrying (shorter backoff)
+          if (attempt < maxRetries) {
+            await new Promise(resolve => setTimeout(resolve, attempt * 500));
+          }
+        }
+      }
       
-      return apiResponse.data;
+      // If all retries failed, throw a network error with more specific message
+      const networkError = new Error('Network connection failed. Server may be experiencing issues.');
+      console.error('All attempts failed for getAllUsers:', lastError?.message);
+      throw networkError;
+      
     } catch (error) {
       if (error instanceof Error) {
         console.error('Get all users failed:', error.message);
@@ -365,7 +444,6 @@ class ApiService {
 
   async getUserById(userId: string): Promise<User> {
     try {
-      // Validate userId parameter
       this.validateUserId(userId);
 
       const response = await fetch(`${BASE_URL}/admin/users/${userId}`, {
@@ -388,7 +466,6 @@ class ApiService {
 
   async searchUsers(name: string): Promise<User[]> {
     try {
-      // Validate search parameter
       this.validateSearchKeyword(name);
 
       const response = await fetch(`${BASE_URL}/users/search?name=${encodeURIComponent(name)}`, {
