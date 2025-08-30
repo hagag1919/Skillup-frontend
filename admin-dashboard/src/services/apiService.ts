@@ -13,7 +13,7 @@ import type {
   EnrollmentAnalytics,
 } from '../types';
 
-const BASE_URL = 'http://localhost:8888/api';
+const BASE_URL = 'https://skillup-zvp9.onrender.com/api';
 
 // Global authentication error handler
 const handleAuthError = () => {

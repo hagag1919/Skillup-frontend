@@ -4,7 +4,7 @@ import type { ApiResponse } from '../types/index.js';
 
 // API Configuration
 export const API_CONFIG = {
-  BASE_URL: 'http://localhost:8888',
+  BASE_URL: 'https://skillup-zvp9.onrender.com',
   TIMEOUT: 10000,
   HEADERS: {
     'Content-Type': 'application/json',

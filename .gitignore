@@ -31,3 +31,4 @@ dist-ssr
 *.flv
 *.webm
 *.mkv
+.vercel
