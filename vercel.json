@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "name": "skillup-frontend-website",
+  "buildCommand": "cd skillup-website && npm install && npm run build",
+  "outputDirectory": "skillup-website/dist",
+  "installCommand": "cd skillup-website && npm install",
+  "framework": "vite",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}

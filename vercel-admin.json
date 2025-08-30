@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "name": "skillup-admin-dashboard",
+  "buildCommand": "cd admin-dashboard && npm install && npm run build",
+  "outputDirectory": "admin-dashboard/dist",
+  "installCommand": "cd admin-dashboard && npm install",
+  "framework": "vite",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}

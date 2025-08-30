@@ -1,0 +1,17 @@
+{
+  "name": "skillup-frontend-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:website\" \"npm run dev:admin\"",
+    "dev:website": "cd skillup-website && npm run dev",
+    "dev:admin": "cd admin-dashboard && npm run dev",
+    "build": "npm run build:website && npm run build:admin",
+    "build:website": "cd skillup-website && npm run build",
+    "build:admin": "cd admin-dashboard && npm run build",
+    "install:all": "npm install && cd skillup-website && npm install && cd ../admin-dashboard && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
